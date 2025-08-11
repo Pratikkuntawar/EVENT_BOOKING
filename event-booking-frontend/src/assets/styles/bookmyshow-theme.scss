@@ -1,0 +1,25 @@
+@use '@angular/material' as mat;
+
+// BookMyShow color palette
+$primary-red: mat.define-palette(mat.$red-palette, 500);
+$accent-black: mat.define-palette(mat.$grey-palette, 900);
+$warn-color: mat.define-palette(mat.$pink-palette, A200);
+
+$theme: mat.define-light-theme((
+  color: (
+    primary: $primary-red,
+    accent: $accent-black,
+    warn: $warn-color
+  ),
+  typography: mat.define-typography-config(),
+  density: 0
+));
+
+@include mat.all-component-themes($theme);
+
+// Global styles
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  background-color: #fafafa;
+}
