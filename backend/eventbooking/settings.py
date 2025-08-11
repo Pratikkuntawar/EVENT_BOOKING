@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'users.CustomUser'
 
 # Application definition
 
@@ -72,7 +73,7 @@ SIMPLE_JWT = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "events",
+        "NAME": "event",
         "USER": "root",
         "PASSWORD": "Shreemataji@123",
         "HOST": "localhost",
