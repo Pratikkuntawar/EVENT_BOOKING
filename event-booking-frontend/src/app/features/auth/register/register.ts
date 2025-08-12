@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { RegisterRequest } from '../../../core/models/user.model';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-register:not(p)',
   standalone: true,
   imports: [
     CommonModule,
