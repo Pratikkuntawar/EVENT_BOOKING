@@ -14,13 +14,14 @@
     <input matInput formControlName="password" type="password">
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Role</mat-label>
-    <mat-select formControlName="role">
-      <mat-option value="User">Attendee</mat-option>
-      <mat-option value="Organizer">Organizer</mat-option>
-    </mat-select>
-  </mat-form-field>
+ <mat-form-field appearance="fill" class="full-width role-select">
+  <mat-label>I am a</mat-label>
+  <mat-select formControlName="role">
+    <mat-option value="User">Attendee</mat-option>
+    <mat-option value="Organizer">Organizer</mat-option>
+  </mat-select>
+</mat-form-field>
+
 
   <button mat-raised-button color="primary" class="full-width" [disabled]="isLoading">
     @if (isLoading) {
