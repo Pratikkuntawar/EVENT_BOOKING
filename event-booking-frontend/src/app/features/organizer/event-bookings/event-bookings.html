@@ -1,0 +1,39 @@
+<h2>Bookings for Event #{{ eventId }}</h2>
+
+@if (loading) {
+  <p>Loading bookings...</p>
+} @else {
+  @if (bookings.length > 0) {
+    <table mat-table [dataSource]="bookings" class="mat-elevation-z8">
+      <!-- Username Column -->
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> Username </th>
+        <td mat-cell *matCellDef="let booking"> {{ booking.user.username }} </td>
+      </ng-container>
+
+      <!-- Tickets Count Column -->
+      <ng-container matColumnDef="ticket_count">
+        <th mat-header-cell *matHeaderCellDef> Tickets Booked </th>
+        <td mat-cell *matCellDef="let booking"> {{ booking.ticket_count }} </td>
+      </ng-container>
+
+      <!-- Booked At Column -->
+      <ng-container matColumnDef="booked_at">
+        <th mat-header-cell *matHeaderCellDef> Booked At </th>
+        <td mat-cell *matCellDef="let booking"> {{ booking.booked_at | date:'medium' }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div class="export-buttons">
+      <button mat-raised-button color="primary" (click)="exportBookings('csv')">Export CSV</button>
+      <button mat-raised-button color="accent" (click)="exportBookings('json')">Export JSON</button>
+    </div>
+
+  } @else {
+    <p>No bookings found for this event.</p>
+  }
+}
+

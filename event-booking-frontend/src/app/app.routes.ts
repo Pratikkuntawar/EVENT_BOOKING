@@ -6,6 +6,7 @@ import { EventDetailComponent } from './features/events/event-detail/event-detai
 import { MyBookingsComponent } from './features/bookings/my-bookings/my-bookings';
 import { DashboardComponent } from './features/organizer/dashboard/dashboard';
 import { ManageEventComponent } from './features/organizer/manage-event/manage-event';
+import { EventBookingsComponent } from './features/organizer/event-bookings/event-bookings';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,4 +18,6 @@ export const routes: Routes = [
    { path: 'organizer/dashboard', component: DashboardComponent },
   { path: 'organizer/create-event', component: ManageEventComponent },
   { path: 'organizer/edit-event/:id', component: ManageEventComponent },
+   { path: 'organizer/event-bookings/:id', component: EventBookingsComponent },
 ];
+
