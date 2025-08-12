@@ -1,0 +1,10 @@
+.role-select {
+  ::ng-deep .mat-mdc-form-field-flex {
+    background-color: #fff5f7;
+    border-radius: 6px;
+  }
+  mat-label {
+    color: #f84464;
+    font-weight: bold;
+  }
+}
