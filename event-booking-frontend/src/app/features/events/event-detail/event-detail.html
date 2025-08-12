@@ -1,0 +1,36 @@
+@import '@angular/common';
+
+@if (!loading && event) {
+<mat-card class="event-detail-card">
+    <img mat-card-image [src]="event.image_url" alt="{{ event.title }}">
+    <mat-card-content>
+        <h2>{{ event.title }}</h2>
+        <p>{{ event.description }}</p>
+        <p><strong>Location:</strong> {{ event.location }}</p>
+        <p><strong>Date:</strong> {{ event.datetime | date:'fullDate' }}</p>
+        <p><strong>Category:</strong> {{ event.category }}</p>
+        <p><strong>Price per ticket:</strong> ₹{{ event.ticket_price }}</p>
+        <p><strong>Tickets Remaining:</strong> {{ event.tickets_remaining }}</p>
+
+        <mat-form-field appearance="outline" class="quantity-selector">
+            <mat-label>Tickets to book</mat-label>
+            <mat-select [(ngModel)]="ticketQuantity">
+                <!-- let i = 1; i <= event.tickets_remaining; i++ -->
+                @for (i of ticketsArray; track i) {
+                <mat-option [value]="i">{{ i }}</mat-option>
+                }
+
+            </mat-select>
+        </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="confirmBooking()"
+            [disabled]="event.tickets_remaining === 0">
+            Book Now
+        </button>
+    </mat-card-actions>
+</mat-card>
+} @else {
+<p>Loading event details...</p>
+}

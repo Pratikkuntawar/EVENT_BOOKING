@@ -1,0 +1,12 @@
+<div *ngFor="let b of bookings">
+  <mat-card>
+    <mat-card-content>
+      <h3>{{ b.event.title }}</h3>
+      <p>Tickets: {{ b.ticket_count }}</p>
+      <p>Date: {{ b.event.datetime | date:'medium' }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="warn" (click)="cancelBooking(b.id)">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
