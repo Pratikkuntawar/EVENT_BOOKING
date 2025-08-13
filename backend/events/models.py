@@ -12,8 +12,8 @@ class Event(models.Model):
     tickets_remaining = models.PositiveIntegerField()
     ticket_price = models.DecimalField(max_digits=10, decimal_places=2, default=500.00)
     organizer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='organized_events')
-    image_url = models.URLField(max_length=500,default="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2hsa5aYA0NfcvhScC8i3nm4EO0G93eaolqA&s")  # Replace with your default hosted image
-    
+    #image_url = models.URLField(max_length=500,default="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2hsa5aYA0NfcvhScC8i3nm4EO0G93eaolqA&s")  # Replace with your default hosted image
+    image_base64 = models.TextField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.pk:  # on create
