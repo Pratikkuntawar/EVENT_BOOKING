@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+from pathlib import Path
+from datetime import timedelta
+from decouple import config
+import cloudinary
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+t-k9tv@wsy#l!4%1i&27lsu)zra4q8xj325kth^6f#0c!-&7q'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,7 +50,18 @@ INSTALLED_APPS = [
     'users',
     'events',
     'bookings',
+    'cloudinary',
+    'cloudinary_storage',
 ]
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# Cloudinary configuration
+cloudinary.config( 
+    cloud_name=config('CLOUDINARY_CLOUD_NAME'), 
+    api_key=config('CLOUDINARY_API_KEY'), 
+    api_secret=config('CLOUDINARY_API_SECRET')
+)
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
@@ -70,14 +86,15 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
+# Database
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "event",
-        "USER": "root",
-        "PASSWORD": "Shreemataji@123",
-        "HOST": "localhost",
-        "PORT": "3306",
+        "ENGINE": config('DB_ENGINE'),
+        "NAME": config('DB_NAME'),
+        "USER": config('DB_USER'),
+        "PASSWORD": config('DB_PASSWORD'),
+        "HOST": config('DB_HOST'),
+        "PORT": config('DB_PORT', cast=int),
     }
 }
 
