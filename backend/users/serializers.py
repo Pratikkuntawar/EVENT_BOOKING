@@ -5,12 +5,11 @@ User = CustomUser
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CustomUser
-        fields = ['id', 'username', 'email', 'password', 'role']
-        extra_kwargs = {'password': {'write_only': True}}
+        model = CustomUser #telling DRF that this serializer is based on customUser Modal
+        fields = ['id', 'username', 'email', 'password', 'role']#fields for serializing (coverting python onject into json)
 
-    def create(self, validated_data):
-        return CustomUser.objects.create_user(**validated_data)
+    def create(self, validated_data):#Aand this called create method defined in customusermanager
+        return CustomUser.objects.create_user(**validated_data)#** is req to convert python obj into json data
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
@@ -26,7 +25,7 @@ class LoginSerializer(serializers.Serializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['id','username', 'email']
+        fields = ['id','username', 'email']#this fields values get
 
 User = CustomUser
 

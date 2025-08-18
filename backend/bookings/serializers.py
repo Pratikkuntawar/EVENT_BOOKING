@@ -21,12 +21,12 @@ from events.serializers import EventSerializer
 class BookingSerializer(serializers.ModelSerializer):
     event = EventSerializer(read_only=True)
     event_id = serializers.PrimaryKeyRelatedField(
-        queryset=Event.objects.all(), source='event', write_only=True
+        queryset=Event.objects.all(), source='event', write_only=True#we used source=event here becuase user will pass only event id then it will map to whole event in response body
     )
 
     class Meta:
         model = Booking
         fields = ['id', 'user', 'event', 'event_id', 'ticket_count', 'booked_at']  # Add event_id here
-        read_only_fields = ['user', 'booked_at']
+        read_only_fields = ['user', 'booked_at']#if i comment this line then postman will asked for user filed in request obj
 
 

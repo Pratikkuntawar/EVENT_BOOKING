@@ -7,22 +7,16 @@ class CustomUserManager(BaseUserManager):
     def create_user(self, username, email, password=None, role='User'):
         if not email:
             raise ValueError('Users must have an email address')
-        email = self.normalize_email(email)
+        email = self.normalize_email(email)# this coverts the the domain part of email into lowercase
         user = self.model(username=username, email=email, role=role)
-        user.set_password(password)
-        user.save(using=self._db)
+        user.set_password(password)#this is where password is hashed before data storing into the database (Django hashed password automatically)
+        user.save(using=self._db)#this us where data is saved into database
         return user
 
-    def create_superuser(self, username, email, password):
-        user = self.create_user(username, email, password, role='Organizer')
-        user.is_staff = True
-        user.is_superuser = True
-        user.save(using=self._db)
-        return user
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     ROLE_CHOICES = (
-        ('Organizer', 'Organizer'),
+        ('Organizer', 'Organizer'),#left right Organiser will saved in database and right side Organiser for admin panel
         ('User', 'User'),
     )
 
@@ -36,27 +30,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'email'#Tells Django to use email instead of username for authentication.bydefault django perform login via username(bydefault:username is req for login)
+    REQUIRED_FIELDS = ['username']#django will ask for username while creating superuser
 
     def __str__(self):
         return f"{self.username} ({self.role})"
 
     class Meta:
-        db_table = 'custom_user_table'  # 👈 Set your desired DB table name here
+        db_table = 'custom_user_table'  
 
 
-
-
-class EmailOTP(models.Model):
-    email = models.EmailField(unique=True)
-    otp = models.CharField(max_length=6)
-    created_at = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return f"{self.email} - {self.otp}"
-
-    def generate_otp(self):
-        self.otp = str(random.randint(100000, 999999))
-        self.created_at = timezone.now()
-        self.save()
