@@ -1,0 +1,41 @@
+<div class="filters">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search events</mat-label>
+    <input matInput [(ngModel)]="searchTerm" (keyup.enter)="onSearchChange()">
+    <button mat-icon-button matSuffix (click)="onSearchChange()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="category-field">
+    <mat-label>Category</mat-label>
+    <mat-select [(value)]="selectedCategory" (selectionChange)="loadEvents()">
+      <mat-option value="">All</mat-option>
+      @for (cat of categories; track cat) {
+        <mat-option [value]="cat">{{ cat }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="event-grid" *ngIf="!loading; else loadingTpl">
+  @for (event of events; track event.id) {
+    <mat-card class="event-card">
+      <img mat-card-image [src]="event.image_url" alt="{{ event.title }}">
+      <mat-card-content>
+        <h3>{{ event.title }}</h3>
+        <p>{{ event.location }} • {{ event.datetime | date:'mediumDate' }}</p>
+        <p class="price">₹{{ event.ticket_price }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" [routerLink]="['/events', event.id]">
+          Book Now
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  }
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading-msg">Loading events...</div>
+</ng-template>

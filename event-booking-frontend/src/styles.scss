@@ -5,6 +5,10 @@
 // Learn more about theming and how to use it for your application's
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
+// @use 'assets/styles/bookmyshow-theme';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+
 
 html {
   @include mat.theme((
@@ -37,3 +41,14 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.auth-form {
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.full-width {
+  width: 100%;
+}

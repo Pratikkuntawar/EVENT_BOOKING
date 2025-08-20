@@ -1,0 +1,17 @@
+.navbar {
+  display: flex;
+  align-items: center;
+
+  .logo {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white;
+    display: flex;
+    align-items: center;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+}

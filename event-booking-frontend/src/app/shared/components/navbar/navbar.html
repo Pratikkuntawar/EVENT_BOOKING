@@ -1,0 +1,35 @@
+<mat-toolbar color="primary" class="navbar">
+  <span class="logo" routerLink="/events">
+    <mat-icon>event</mat-icon>&nbsp;EventBooker
+  </span>
+
+  <span class="spacer"></span>
+
+  <button mat-button routerLink="/events">Events</button>
+
+  @if (currentUser$ | async; as user) {
+    <button mat-button routerLink="/my-bookings">My Bookings</button>
+
+    @if (user.role === 'Organizer') {
+      <button mat-button routerLink="/organizer/dashboard">Dashboard</button>
+    }
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/profile">
+        <mat-icon>person</mat-icon>
+        Profile
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </mat-menu>
+  } @else {
+    <button mat-button routerLink="/login">Login</button>
+    <button mat-raised-button color="accent" routerLink="/register">Sign Up</button>
+  }
+</mat-toolbar>

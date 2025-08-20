@@ -1,0 +1,14 @@
+.event-detail-card {
+  max-width: 600px;
+  margin: 0 auto;
+
+  img {
+    max-height: 300px;
+    object-fit: cover;
+  }
+
+  .quantity-selector {
+    width: 150px;
+    margin-top: 1rem;
+  }
+}
