@@ -1,2 +1,18 @@
+
+# macOS
 .DS_Store
+
+# env files
 .env
+backend/.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+
+# Virtual environment
+venv/
+.env/
